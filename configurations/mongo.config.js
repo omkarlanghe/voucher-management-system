@@ -10,10 +10,8 @@ const database = {
 };
 
 const collection_names = {
-    registeredEvents: 'registeredEvents',
     users: 'users',
-    photos: 'photos',
-    feedbacks: 'feedbacks'
+    vouchers: 'vouchers'
 };
 
 module.exports = { database, collection_names };

@@ -6,7 +6,7 @@ const dot_env = require('dotenv');
 dot_env.config();
 
 const database = {
-    url: process.env.MONGODB_URI,
+    url: process.env.DATABASE_URL,
     name: process.env.DATABASE_NAME
 };
 
