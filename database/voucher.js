@@ -6,6 +6,8 @@ const voucher_code = require('voucher-code-generator');
 
 exports.generateVoucher = async (req, res) => {
     try {
+        let { sendMail } = require('../services/service.mail');
+        let format = require('dateformat');
         let mongo_client = await mongo_util.dbClient();
         let voucher = {
             'voucher_code': voucher_code.generate(
@@ -33,13 +35,21 @@ exports.generateVoucher = async (req, res) => {
                     throw err;
                 }
 
+                // updating voucher pin with hash
                 voucher.voucher_pin = hash;
-
-                // sent mail.
 
                 // save in database.
                 let response = await mongo_client.collection(mongo_config.collection_names.vouchers).insertOne(voucher);
                 if (response.insertedCount == 1) {
+
+                    // modification on voucher details.
+                    voucher.voucher_pin = req.pin;
+                    voucher.generation_time = format(voucher.generation_time, `ddd dS mmm yyyy hh:MM:ss TT`)
+
+                    // once successfully saved, then only sent email.
+                    sendMail(voucher);
+
+                    // sending API response to the user.
                     res.status(200).json(voucher);
                 }
             });
