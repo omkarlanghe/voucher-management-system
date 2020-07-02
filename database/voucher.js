@@ -153,7 +153,7 @@ exports.redeemVoucher = async (req, res) => {
                         if (is_valid_email.updation_time <= is_valid_email.next_usage_time) {
                             res.status(400).json('Cannot redeem. Next attempt to redeem voucher code should be after 10 minutes.');
                         } else {
-                            is_valid_email.next_usage_time = is_valid_email.next_usage_time = new Date(is_valid_email.updation_time).setMinutes(new Date(is_valid_email.updation_time).getMinutes() + 10);
+                            is_valid_email.next_usage_time = new Date(is_valid_email.updation_time).setMinutes(new Date(is_valid_email.updation_time).getMinutes() + 10);
 
                             let response = await mongo_client.collection(mongo_config.collection_names.vouchers).updateOne(
                                 { 'email_address': req.email, 'voucher_code': req.voucher_code },
@@ -166,6 +166,7 @@ exports.redeemVoucher = async (req, res) => {
                                 is_valid_email.voucher_pin = req.voucher_pin;
                                 is_valid_email.generation_time = format(is_valid_email.generation_time, `ddd dS mmm yyyy hh:MM:ss TT`);
                                 is_valid_email.updation_time = format(is_valid_email.updation_time, `ddd dS mmm yyyy hh:MM:ss TT`);
+                                is_valid_email.next_usage_time = format(is_valid_email.next_usage_time, `ddd dS mmm yyyy hh:MM:ss TT`);
                                 res.json(is_valid_email);
                             }
                         }
@@ -193,6 +194,7 @@ exports.redeemVoucher = async (req, res) => {
                                 is_valid_email.voucher_pin = req.voucher_pin;
                                 is_valid_email.generation_time = format(is_valid_email.generation_time, `ddd dS mmm yyyy hh:MM:ss TT`);
                                 is_valid_email.updation_time = format(is_valid_email.updation_time, `ddd dS mmm yyyy hh:MM:ss TT`);
+                                is_valid_email.next_usage_time = format(is_valid_email.next_usage_time, `ddd dS mmm yyyy hh:MM:ss TT`);
                                 res.json(is_valid_email);
                             }
                         }
