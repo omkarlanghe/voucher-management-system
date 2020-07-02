@@ -4,6 +4,11 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const { errorMessage } = require('../utils/error');
 
+/**
+ * @description database function which querys to the database for user registration.
+ * @param {*} req 
+ * @param {*} res 
+ */
 exports.registerUser = async (req, res) => {
     try {
         let mongo_client = await mongo_util.dbClient();
@@ -39,6 +44,11 @@ exports.registerUser = async (req, res) => {
     }
 };
 
+/**
+ * @description database function which queries and verified login user from database.
+ * @param {*} req 
+ * @param {*} res 
+ */
 exports.loginUser = async (req, res) => {
     try {
         let mongo_client = await mongo_util.dbClient();

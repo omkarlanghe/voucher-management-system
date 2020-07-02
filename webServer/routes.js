@@ -11,6 +11,6 @@ exports.navigateRoutes = async (app) => {
     app.post('/api/user/register', user.registerUser);
     app.post('/api/user/login', user.loginUser);
     app.post('/api/voucher/generate', jwt_secure_check, voucher.generateVoucher);
-    app.put('/api/voucher/redem', voucher.redeemVoucher);
+    app.put('/api/voucher/redem', jwt_secure_check, voucher.redeemVoucher);
     app.get('/api/voucher/', jwt_secure_check, voucher.getVoucherDetails);
 };

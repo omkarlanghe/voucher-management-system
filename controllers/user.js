@@ -3,6 +3,11 @@ const { errorMessage } = require('../utils/error');
 
 const validator = require('validator').default;
 
+/**
+ * @description controller function for user registration.
+ * @param {*} req 
+ * @param {*} res 
+ */
 exports.registerUser = async (req, res) => {
     try {
         if (typeof req.body.name != 'string' || typeof req.body.email != 'string' || typeof req.body.password != 'string' || typeof req.body.adminPassCode != 'string') {
@@ -28,6 +33,11 @@ exports.registerUser = async (req, res) => {
     }
 };
 
+/**
+ * @description wrapper function for user login.
+ * @param {*} req 
+ * @param {*} res 
+ */
 exports.loginUser = async (req, res) => {
     try {
         if (typeof req.body.email != 'string' || typeof req.body.password != 'string') {
@@ -49,6 +59,10 @@ exports.loginUser = async (req, res) => {
     }
 };
 
+/**
+ * @description function to validate user before registration.
+ * @param {*} p_data
+ */
 exports.registerValidator = (p_data) => {
     let bool_flag_isValid = true;
     let errors = {};
@@ -81,6 +95,10 @@ exports.registerValidator = (p_data) => {
     return ({ 'errors': errors, 'flag': bool_flag_isValid });
 };
 
+/**
+ * @description function to validate user credentials before login.
+ * @param {*} p_data 
+ */
 exports.loginValidator = (p_data) => {
     let bool_flag_isValid = true;
     let errors = {};

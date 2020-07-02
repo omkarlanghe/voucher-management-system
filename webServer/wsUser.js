@@ -7,6 +7,11 @@
 const { errorMessage, errorObject } = require('../utils/error');
 const { registerUser, loginUser } = require('../controllers/user');
 
+/**
+ * @description wrapper function for user registration.
+ * @param {*} req 
+ * @param {*} res 
+ */
 exports.registerUser = async (req, res) => {
     try {
         if (!req._body) {
@@ -27,6 +32,11 @@ exports.registerUser = async (req, res) => {
     }
 };
 
+/**
+ * @description wrapper function for user login.
+ * @param {*} req 
+ * @param {*} res 
+ */
 exports.loginUser = async (req, res) => {
     try {
         if (!req._body) {

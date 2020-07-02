@@ -1,6 +1,6 @@
 /**
- * service.mail.js: mailing service initiated when user successfully register's for an event.
- * Confirmation mail is sent, once registration succeeds.
+ * service.mail.js: mailing service initiated when voucher coupen is successfully generated for the given email address.
+ * Confirmation mail is sent, once generation succeeds.
  */
 
 const node_mailer = require('nodemailer');
@@ -11,6 +11,10 @@ const mail_transporter = node_mailer.createTransport({
     auth: { user: email.emailId, pass: email.password }
 });
 
+/**
+ * @description function which sends email.
+ * @param {*} p_details 
+ */
 exports.sendMail = (p_details) => {
     try {
         let mail_options = {

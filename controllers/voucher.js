@@ -3,16 +3,21 @@ const { generateVoucher, getVouchers, redeemVoucher } = require('../database/vou
 const format = require('dateformat');
 const validator = require('validator').default;
 
+/**
+ * @description controller function to generate voucher coupen.
+ * @param {*} req 
+ * @param {*} res 
+ */
 exports.generateVoucher = async (req, res) => {
     try {
-        if (typeof req.email_id != 'string' || typeof req.pin != 'string') {
+        if (typeof req.email != 'string' || typeof req.pin != 'string') {
             let error = errorMessage('Invalid type of input fields. Requires string.');
             throw error;
         }
 
         let only_spaces = /^\s*$/;
 
-        if (!validator.isEmail(req.email_id)) {
+        if (!validator.isEmail(req.email)) {
             let error = errorMessage('Email address is invalid.');
             throw error;
         } else if (validator.isEmpty(req.pin) || only_spaces.test(req.pin)) {
@@ -29,6 +34,12 @@ exports.generateVoucher = async (req, res) => {
     }
 };
 
+/**
+ * @description controller function to get all vouchers based on query parameters. 
+ * This function constructs aggeregation stage json based on incoming query params and once stage is constructed, 
+ * json is passed to next function where mongo db query is performed.
+ * @param {*} p_Req
+ */
 exports.getVouchers = async (p_Req) => {
     try {
         let aggeregation_stage = { '$match': {} };
@@ -60,6 +71,11 @@ exports.getVouchers = async (p_Req) => {
     }
 };
 
+/**
+ * @description controller function to redeem voucher coupen.
+ * @param {*} req 
+ * @param {*} res 
+ */
 exports.redeemVoucher = async (req, res) => {
     try {
         if (typeof req.email != 'string' || typeof req.voucher_code != 'string' || typeof req.voucher_pin != 'string' || typeof req.price != 'number') {

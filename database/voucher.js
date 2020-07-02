@@ -5,6 +5,11 @@ const voucher_code = require('voucher-code-generator');
 const format = require('dateformat');
 const { errorMessage } = require('../utils/error');
 
+/**
+ * @description database function which generates voucher coupen and saves in database.
+ * @param {*} req 
+ * @param {*} res 
+ */
 exports.generateVoucher = async (req, res) => {
     try {
         let { sendMail } = require('../services/service.mail');
@@ -19,7 +24,7 @@ exports.generateVoucher = async (req, res) => {
                 }
             )[0],
             'voucher_pin': null,
-            'email_address': req.email_id,
+            'email_address': req.email,
             'generation_time': new Date().getTime(),
             'usage_activity': 0,
             'status': 'active',
@@ -62,6 +67,10 @@ exports.generateVoucher = async (req, res) => {
     }
 };
 
+/**
+ * @description database function which retrieves voucher coupens based on pipeline stage passed as a parameter to it.
+ * @param {*} p_pipeline_stage 
+ */
 exports.getVouchers = async (p_pipeline_stage) => {
     try {
         let mongo_client = await mongo_util.dbClient();
@@ -73,6 +82,11 @@ exports.getVouchers = async (p_pipeline_stage) => {
     }
 };
 
+/**
+ * @description database function which updates and redeems voucher coupens from database.
+ * @param {*} req 
+ * @param {*} res 
+ */
 exports.redeemVoucher = async (req, res) => {
     try {
         let mongo_client = await mongo_util.dbClient();
@@ -127,19 +141,25 @@ exports.redeemVoucher = async (req, res) => {
                         is_valid_email.price = 0;
                         is_valid_email.max_usage_limit--;
                         is_valid_email.updation_time = new Date().getTime();
-                        is_valid_email.next_usage_time = is_valid_email.next_usage_time = new Date(is_valid_email.updation_time).setMinutes(new Date(is_valid_email.updation_time).getMinutes() + 10);
-                        let response = await mongo_client.collection(mongo_config.collection_names.vouchers).updateOne(
-                            { 'email_address': req.email, 'voucher_code': req.voucher_code },
-                            { '$set': is_valid_email }
-                        );
 
-                        if (response.result.nModified == 0) {
-                            res.json('Data not found to redeem voucher coupen.');
+                        if (is_valid_email.updation_time <= is_valid_email.next_usage_time) {
+                            res.status(400).json('Cannot redeem. Next attempt to redeem voucher code should be after 10 minutes.');
                         } else {
-                            is_valid_email.voucher_pin = req.voucher_pin;
-                            is_valid_email.generation_time = format(is_valid_email.generation_time, `ddd dS mmm yyyy hh:MM:ss TT`);
-                            is_valid_email.updation_time = format(is_valid_email.updation_time, `ddd dS mmm yyyy hh:MM:ss TT`);
-                            res.json(is_valid_email);
+                            is_valid_email.next_usage_time = is_valid_email.next_usage_time = new Date(is_valid_email.updation_time).setMinutes(new Date(is_valid_email.updation_time).getMinutes() + 10);
+
+                            let response = await mongo_client.collection(mongo_config.collection_names.vouchers).updateOne(
+                                { 'email_address': req.email, 'voucher_code': req.voucher_code },
+                                { '$set': is_valid_email }
+                            );
+
+                            if (response.result.nModified == 0) {
+                                res.json('Data not found to redeem voucher coupen.');
+                            } else {
+                                is_valid_email.voucher_pin = req.voucher_pin;
+                                is_valid_email.generation_time = format(is_valid_email.generation_time, `ddd dS mmm yyyy hh:MM:ss TT`);
+                                is_valid_email.updation_time = format(is_valid_email.updation_time, `ddd dS mmm yyyy hh:MM:ss TT`);
+                                res.json(is_valid_email);
+                            }
                         }
                     } else {
 

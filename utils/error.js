@@ -1,3 +1,7 @@
+/**
+ * error.js: common error message functions which are shared by all files in this project.
+ */
+
 exports.errorMessage = (message) => {
     if (typeof message === 'string') {
         let error = new Error(message);

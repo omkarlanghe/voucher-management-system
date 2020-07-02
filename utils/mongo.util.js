@@ -5,6 +5,10 @@ const database_name = database.name;
 
 let mongo_client;
 
+/**
+ * @description Common mongo client instance shared by all project files.
+ * @param {*} p_database 
+ */
 function getMongoClient(p_database) {
     if (!mongo_client) {
         return (new Promise((resolve, reject) => {

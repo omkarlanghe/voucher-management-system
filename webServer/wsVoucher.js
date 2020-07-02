@@ -1,6 +1,11 @@
 const { errorMessage } = require('../utils/error');
 const { generateVoucher, getVouchers, redeemVoucher } = require('../controllers/voucher');
 
+/**
+ * @description wrapper function to to generate voucher coupen.
+ * @param {*} req 
+ * @param {*} res 
+ */
 exports.generateVoucher = async (req, res) => {
     try {
         if (!req._body) {
@@ -17,6 +22,11 @@ exports.generateVoucher = async (req, res) => {
     }
 };
 
+/**
+ * @description wrapper function to to generate voucher details based on query filters.
+ * @param {*} req 
+ * @param {*} res 
+ */
 exports.getVoucherDetails = async (req, res) => {
     try {
         let query_params = req.query;
@@ -28,6 +38,11 @@ exports.getVoucherDetails = async (req, res) => {
     }
 };
 
+/**
+ * @description wrapper function to to redeem voucher.
+ * @param {*} req 
+ * @param {*} res 
+ */
 exports.redeemVoucher = async (req, res) => {
     try {
         if (!req._body) {
