@@ -6,3 +6,10 @@ exports.errorMessage = (message) => {
     }
     return (null);
 };
+
+exports.errorObject = (message, status_code) => {
+    if (typeof message === 'string' && typeof status_code === 'number') {
+        return ({ 'error': message, 'status': status_code });
+    }
+    return (null);
+};
