@@ -41,7 +41,7 @@ exports.registerUser = async (req, res) => {
 exports.loginUser = async (req, res) => {
     try {
         if (typeof req.body.email != 'string' || typeof req.body.password != 'string') {
-            let error = basicError('Invalid type of fields.');
+            let error = errorMessage('Invalid type of fields.');
             throw error;
         }
 

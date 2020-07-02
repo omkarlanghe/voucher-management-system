@@ -26,7 +26,7 @@ exports.registerUser = async (req, res) => {
         bcrypt.genSalt(10, (err, salt) => {
             if (err) {
                 throw err;
-            };
+            }
 
             bcrypt.hash(req.body.password, salt, async (err, hash) => {
                 if (err) {

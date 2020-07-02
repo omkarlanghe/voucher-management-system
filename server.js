@@ -1,7 +1,6 @@
 /**
  * server.js : main file where execution starts.
  */
-const m = require('./utils/mongo.util');
 const express = require('express');
 const nocache = require('nocache');
 const body_parser = require('body-parser');

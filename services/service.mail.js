@@ -44,6 +44,7 @@ exports.sendMail = (p_details) => {
         });
 
     } catch (error) {
+        console.error(error);
         throw error;
     }
 };
