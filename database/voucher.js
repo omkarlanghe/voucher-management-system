@@ -23,7 +23,13 @@ exports.generateVoucher = async (req, res) => {
                     prefix: 'VCD',
                 }
             )[0],
-            'voucher_pin': null,
+            'voucher_pin': voucher_code.generate(
+                {
+                    charset: voucher_code.charset('alphabetic'),
+                    length: 5,
+                    count: 1
+                }
+            )[0],
             'email_address': req.email,
             'generation_time': new Date().getTime(),
             'usage_activity': 0,
@@ -31,13 +37,15 @@ exports.generateVoucher = async (req, res) => {
             'price': 1000,
             'max_usage_limit': 5
         };
+        
+        let voucher_pin_temp = voucher.voucher_pin;
 
         bcrypt.genSalt(10, (err, salt) => {
             if (err) {
                 throw err;
             }
 
-            bcrypt.hash(req.pin, salt, async (err, hash) => {
+            bcrypt.hash(voucher.voucher_pin, salt, async (err, hash) => {
                 if (err) {
                     throw err;
                 }
@@ -50,7 +58,7 @@ exports.generateVoucher = async (req, res) => {
                 if (response.insertedCount == 1) {
 
                     // modification on voucher details.
-                    voucher.voucher_pin = req.pin;
+                    voucher.voucher_pin = voucher_pin_temp;
                     voucher.generation_time = format(voucher.generation_time, `ddd dS mmm yyyy hh:MM:ss TT`);
                     delete voucher._id;
                     // once successfully saved, then only sent email.
@@ -119,7 +127,7 @@ exports.redeemVoucher = async (req, res) => {
                     if (is_valid_email.price == 0) {
                         res.status(400).json('Cannot redeem. Voucher outdated and already redeemed to its max price.');
                     } else if (req.price > is_valid_email.price) {
-                        res.status(400).json('Cannot redeem. Requested price is greated than original price. Max voucher price can be 1000.');
+                        res.status(400).json('Cannot redeem. Requested price is greater than original price. Max voucher price can be 1000.');
                     } else if (req.price <= 0) {
                         res.status(400).json('Cannot redeem. Requested price is invalid.');
                     } else if (is_valid_email.max_usage_limit <= 0) {

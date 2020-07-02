@@ -40,7 +40,7 @@ exports.registerUser = async (req, res) => {
 exports.loginUser = async (req, res) => {
     try {
         if (!req._body) {
-            let error = errorMessage('Body cannot be empty');
+            let error = errorMessage('Body cannot be empty.');
             throw error;
         } else if (Object.keys(req.body).length == 0) {
             let error = errorMessage('Object cannot be empty.');
