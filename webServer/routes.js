@@ -8,7 +8,9 @@ const express_jwt = require('express-jwt');
 const jwt_secure_check = express_jwt({ secret: mongo_config.database.secretOrKey, algorithms: ['HS256'] });
 
 exports.navigateRoutes = async (app) => {
-    app.post('/api/voucher/generate', jwt_secure_check, voucher.generateVoucher);
     app.post('/api/user/register', user.registerUser);
     app.post('/api/user/login', user.loginUser);
+    app.post('/api/voucher/generate', jwt_secure_check, voucher.generateVoucher);
+    app.put('/api/voucher/redem', voucher.redeemVoucher);
+    app.get('/api/voucher/', jwt_secure_check, voucher.getVoucherDetails);
 };
