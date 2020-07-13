@@ -33,29 +33,29 @@ A simple and basic voucher management system written in node.
 ## Folder Structure
 ```
   voucher-management-system/
-    configurations/
-      config.js
-      mongo.config.js
-      passport.js
-    controllers/
-      user.js
-      voucher.js
-    database/
-      user.js
-      voucher.js
-    services/
-      service.mail.js
-    utils/
-      error.js
-      mongo.util.js
-    webServer/
-      routes.js
-      wsUser.js
-      wsVoucher.js
-    .eslintrc.js
-    .gitignore
-    package.json
-    package-lock.js
-    README.md
-    server.js
+      configurations/
+          config.js
+          mongo.config.js
+          passport.js
+      controllers/
+          user.js
+          voucher.js
+      database/
+          user.js
+          voucher.js
+      services/
+          service.mail.js
+      utils/
+          error.js
+          mongo.util.js
+      webServer/
+          routes.js
+          wsUser.js
+          wsVoucher.js
+      .eslintrc.js
+      .gitignore
+      package.json
+      package-lock.js
+      README.md
+      server.js
 ```
