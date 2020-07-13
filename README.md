@@ -29,3 +29,20 @@ A simple and basic voucher management system written in node.
 ## Get Vouchers API
 * An api which will retrieve the voucher details based on the filters.
 * Filters: Generation time(from and to timestamps) filter, Status filter(redeemed, partially redeemed, active), Email ID filter(email address for which a voucher was generated)
+
+## Folder Structure
+```
+  voucher-management-system/
+    configurations/
+    controllers/
+    database/
+    services/
+    utils/
+    webServer/
+    .eslintrc.js
+    .gitignore
+    package.json
+    package-lock.js
+    README.md
+    server.js
+```
