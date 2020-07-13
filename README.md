@@ -68,8 +68,8 @@ A simple and basic voucher management system written in node.
   - A local copy of this remote repository will be cloned on your local machine at specified location.
   
   ### 2. Navigate inside your local git respository by typing below command on terminal.
-  `cd voucher-management-system`
+  - `cd voucher-management-system`
 
   ### 3. Once you are inside this repository, type the below command on terminal.
-  `npm install`
+  - `npm install`
   - This will install all the dependancies required to run backend server (i.e all npm packages, third party libraries, etc).
