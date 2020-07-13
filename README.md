@@ -59,3 +59,17 @@ A simple and basic voucher management system written in node.
       README.md
       server.js
 ```
+## Setup
+
+  ### 1. Clone this repository:
+  - Navigate to the directory where you want to clone this repository from git command line.
+  - Once you navigate to the directory, On git command line type,<br>
+  `git clone https://github.com/omkarlanghe/voucher-management-system.git`
+  - A local copy of this remote repository will be cloned on your local machine at specified location.
+  
+  ### 2. Navigate inside your local git respository by typing below command on terminal.
+  `cd voucher-management-system`
+
+  ### 3. Once you are inside this repository, type the below command on terminal.
+  `npm install`
+  - This will install all the dependancies required to run backend server (i.e all npm packages, third party libraries, etc).
