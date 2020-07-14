@@ -83,6 +83,7 @@ A simple and basic voucher management system written in node.
   - For API testing, I have used Postman API testing tool.
   - API’s are secured using **JWT i.e. Json Web tokens**, Hence we need to paste jwt token in Authorization tab with type bearer token as shown in below image for all voucher related API’s,
   - https://github.com/omkarlanghe/voucher-management-system/blob/master/resources/api.png?raw=true
+  ---
   - **USER REGISTRATION API**
   - **POST**: http://localhost:3007/api/user/register
   - **BODY**:
