@@ -89,7 +89,7 @@ A simple and basic voucher management system written in node.
   - **BODY**:
     `{
       “name”: “omkar langhe”,
-      “email”: “langheomkar07@gmail.com”,
+      “email”: “demouser@gmail.com”,
       “password”: “omkar123”,
       “adminPassCode”: “secret”
      }`
@@ -98,7 +98,7 @@ A simple and basic voucher management system written in node.
   - **POST**: http://localhost:3007/api/user/login
   - **BODY**:
     `{
-      “email”: “langheomkar07@gmail.com”,
+      “email”: “demouser@gmail.com”,
       “password”: “omkar123”,
      }`
   ---
@@ -106,18 +106,18 @@ A simple and basic voucher management system written in node.
   - **POST**: http://localhost:3007/api/voucher/generate
   - **BODY**:
     `{
-      “email”: “langheomkar07@gmail.com”,
+      “email”: “demouser@gmail.com”,
      }`
   ---
   - **VOUCHER REDEEM API**
   - **PUT**: http://localhost:3007/api/voucher/redeem
   - **BODY**:
     `{
-      “email”: “langheomkar07@gmail.com”,
+      “email”: “demouser@gmail.com”,
       “voucher_code”: “<voucher code returned from voucher/generate API>”,
       “voucher_pin”: “<voucher pin returned from voucher/generate API>”,
       “price”: 100
      }`
   ---
   - **GET VOUCHER API**
-  - **GET**: `http://localhost:3007/api/voucher?from_timestamp=1596097420000&to_timestamp=1596097420000&status=active&email=langheomkar07@gmail.com`
+  - **GET**: `http://localhost:3007/api/voucher?from_timestamp=1596097420000&to_timestamp=1596097420000&status=active&email=demouser@gmail.com`
