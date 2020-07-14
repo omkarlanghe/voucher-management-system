@@ -73,3 +73,10 @@ A simple and basic voucher management system written in node.
   ### 3. Once you are inside this repository, type the below command on terminal.
   - `npm install`
   - This will install all the dependancies required to run backend server (i.e all npm packages, third party libraries, etc).
+  
+## Available Scripts
+  - In this project directory, you can run:
+  - `node server.js`
+  - Runs node express server in development mode on http://localhost/3007.<br>
+  
+## API Testing
