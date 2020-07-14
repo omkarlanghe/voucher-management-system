@@ -2,8 +2,8 @@
 A simple and basic voucher management system written in node.
 
 ## Voucher format
-* Voucher Format Type: String, Prefix - “VCD”, Suffix- 10 Random strings and numbers.**<br>
-* Voucher PIN Type: String, Format: 5 randomly generated strings.**<br>
+* Voucher Format Type: String, Prefix - “VCD”, Suffix- 10 Random strings and numbers.<br>
+* Voucher PIN Type: String, Format: 5 randomly generated strings.<br>
 
 ## Voucher Redemption Rule
 * A voucher can be redeemed only by the assigned email id.
@@ -80,3 +80,40 @@ A simple and basic voucher management system written in node.
   - Runs node express server in development mode on http://localhost/3007.<br>
   
 ## API Testing
+  - **USER REGISTRATION API**
+  - **POST**: http://localhost:3007/api/user/register
+  - **BODY**:
+    `{
+      “name”: “omkar langhe”,
+      “email”: “langheomkar07@gmail.com”,
+      “password”: “omkar123”,
+      “adminPassCode”: “secret”
+     }`
+  ---   
+  - **USER LOGIN API**
+  - **POST**: http://localhost:3007/api/user/login
+  - **BODY**:
+    `{
+      “email”: “langheomkar07@gmail.com”,
+      “password”: “omkar123”,
+     }`
+  ---
+  - **VOUCHER GENERATION API**
+  - **POST**: http://localhost:3007/api/voucher/generate
+  - **BODY**:
+    `{
+      “email”: “langheomkar07@gmail.com”,
+     }`
+  ---
+  - **VOUCHER REDEEM API**
+  - **PUT**: http://localhost:3007/api/voucher/redeem
+  - **BODY**:
+    `{
+      “email”: “langheomkar07@gmail.com”,
+      “voucher_code”: “<voucher code returned from voucher/generate API>”,
+      “voucher_pin”: “<voucher pin returned from voucher/generate API>”,
+      “price”: 100
+     }`
+  ---
+  - **GET VOUCHER API**
+  - **GET**: `http://localhost:3007/api/voucher?from_timestamp=1596097420000&to_timestamp=1596097420000&status=active&email=langheomkar07@gmail.com`
